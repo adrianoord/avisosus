@@ -21,7 +21,10 @@
   <body>
     <h1> RESPOSTA CONFIRMADA </h1>
     <script>
-      setTimeout(() => window.top.close(), 2000);
+      const urlConfirm = "https://script.google.com/macros/s/AKfycbwMaOgsM3AiWtJdQIkWXSE8Cw6Seh7H8OmxOqq5-MAT/dev";
+      setTimeout(() => {
+        fetch(`${urlConfirm}${window.location.search}`).then(()=>{});
+      }, 1000);
     </script>
   </body>
 </html>
