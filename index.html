@@ -19,11 +19,27 @@
     <base target="_top">
   </head>
   <body>
-    <h1> RESPOSTA CONFIRMADA </h1>
+    <h1 id="result"> AGUARDE </h1>
     <script>
-      const urlConfirm = "https://script.google.com/macros/s/AKfycbzVY6-GmTYT574nYA2Zlpw9zuDTuog22sE5YuQ71XyyA8KJqbEGlALptmor1z-2JVkdFQ/exec";
+      const urlConfirm = "https://script.google.com/macros/s/AKfycbw0g51CMC2tTrsqnNsNZFBF-GI6GmcNFdEkwP_uc3MkVOUvqsPpf9JdHW7EahIIOchc8A/exec";
       setTimeout(() => {
-        fetch(`${urlConfirm}${window.location.search}`).then(()=>{});
+        fetch(`${urlConfirm}${window.location.search}`)
+          .then((data)=>data.json())
+          .then((data)=>{
+            let result = "Falhou";
+            switch(data.status) {
+              case "success":
+                result = "Confirmado";
+                break;
+              case "already":
+                result = "Já confirmado";
+                break;
+              case "invalid":
+                result = "Token Inválido";
+                break;
+            }
+            document.querySelector("#result").innerText = result;
+          });
       }, 1000);
     </script>
   </body>
